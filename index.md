@@ -12,12 +12,15 @@ Charles B Johnson
 
 - *What is Docker?*
 - How Do You Use Docker?
+- The Past
+- The Present
+- The Future
 
 ---
 
 ## What is Docker?
 
-![docker from a marketing perspective](public/images/docker_marketing.png)
+.center[![docker from a marketing perspective](public/images/docker_marketing.png)]
 
 ---
 ### What is Docker? (cont.)
@@ -42,7 +45,7 @@ Charles B Johnson
 
 ---
 
-![vm vs container](public/images/vm_vs_container_diagram.png)
+.center[![vm vs container](public/images/vm_vs_container_diagram.png)]
 
 ---
 
@@ -67,7 +70,7 @@ Charles B Johnson
 
 ### What is Docker (cont.)
 
-![image vs container](public/images/image_vs_container_diagram.png)
+.center[![image vs container](public/images/image_vs_container_diagram.png)]
 
 ---
 
@@ -75,6 +78,9 @@ Charles B Johnson
 
 - ~~What is Docker?~~
 - *How Do You Use Docker?*
+- The Past
+- The Present
+- The Future
 
 ---
 
@@ -113,7 +119,7 @@ This can be done declaratively with a Dockerfile, or manually
 - Select a base image
   - ubuntu:15.04
 
-![ubuntu docker hub](public/images/ubuntu_docker_hub.png)
+.center[![ubuntu docker hub](public/images/ubuntu_docker_hub.png)]
 
 ---
 
@@ -162,7 +168,7 @@ docker run --publish 9001:9000 $image_id \
   iojs --use_strict --harmony_arrow_functions --eval "$app"
 ```
 
-![it works](public/images/iojs_example.png)
+.center[![it works](public/images/iojs_example.png)]
 
 ---
 
@@ -170,3 +176,155 @@ docker run --publish 9001:9000 $image_id \
 
 - ~~What is Docker?~~
 - ~~How Do You Use Docker?~~
+- *The Past*
+- The Present
+- The Future
+
+---
+
+## The Past
+
+#### Virtual Machines
+
+- Must be explicitly requested
+- Machines are designated as having specific purposes (ie. `dev`, `deploy`, `mongo`)
+- Shared across the entire team
+- Setup is familiar and generally well understood
+- Very configurable
+- "Fire and forget"
+
+---
+
+### The Past (cont.)
+
+#### Virtual Machines
+
+- Who is responsible for maintaining these machines?
+- How do we manage multiple applications requiring different versions of the same dependency?
+- How do we know what has changed?
+- What happens when something breaks?
+
+---
+
+### The Past (cont.)
+
+#### Virtual Machines
+
+.center[![oh god no please](public/images/spiderman_no.gif)]
+
+---
+
+## Agenda
+
+- ~~What is Docker?~~
+- ~~How Do You Use Docker?~~
+- ~~The Past~~
+- *The Present*
+- The Future
+
+---
+
+## The Present
+
+#### OneOps
+
+- Gives us a powerful abstraction over OpenStack
+- Maintenance is greatly simplified
+- Configuration is visual and easy to understand
+- Our applications are isolated from other applications
+- Dependencies and setup are automatically handled
+- Has its own form of version control built into the interface
+- Supports basic monitoring
+- Allows for staged deployments
+- Supports multiple environments for no extra effort
+
+---
+
+### The Present (cont.)
+
+#### OneOps
+
+- UI is cumbersome
+- Difficult to iterate and experiment since the feedback loop is slow and often error prone
+- How do you accomplish development (on a developer's machine) vs production parity?
+- Configuration is limited
+- Mostly proprietary
+
+---
+
+## Agenda
+
+- ~~What is Docker?~~
+- ~~How Do You Use Docker?~~
+- ~~The Past~~
+- ~~The Present~~
+- *The Future*
+
+---
+
+## The Future
+
+#### Docker
+
+- Includes almost all the benefits of OneOps
+- Development and production environments are identical
+  - Application and the environment are created in development
+- The packaged application is self-contained
+  - Easy to setup in production or on a new engineer's machine
+- Setting up images is familiar, automated, repeatable, and faster to iterate on
+- Containers are not limited to the OS of the host
+  - Choose your own software and its own versions
+- Images can be shared across teams
+  - Not solely dependent on OneOps developers to create specific configurations
+- Infrastructure as code, Dockerfiles can just be checked into GitHub
+- Less resource intensive than VMs, but also better performance
+- Open Source
+
+---
+
+### The Future (cont.)
+
+#### Beyond?
+
+- The tooling is growing at an accelerating rate
+  - Container optimized distros
+      - CoreOS, RancherOS, Ubuntu Snappy, Project Atomic, Photon
+  - Clustering
+      - Docker Swarm, Kubernetes, Mesos
+  - Orchestration
+      - Docker Compose
+  - Service Discovery & Networking
+      - Weave
+  - Portability
+      - Flocker
+- It doesn't end at Docker
+  - rkt, LXD
+
+---
+
+### The Future (cont.)
+
+#### Wtf
+
+.center[![so many things](public/images/docker_tooling.png)]
+
+---
+
+## Agenda
+
+- ~~What is Docker?~~
+- ~~How Do You Use Docker?~~
+- ~~The Past~~
+- ~~The Present~~
+- ~~The Future~~
+
+---
+
+## The End
+
+<video poster="//i.imgur.com/FKRMMaph.jpg" preload="auto" autoplay="autoplay" muted="muted" loop="loop">
+  <source src="//i.imgur.com/FKRMMap.webm" type="video/webm">
+  <source src="//i.imgur.com/FKRMMap.mp4" type="video/mp4">
+</video>
+
+THANKS
