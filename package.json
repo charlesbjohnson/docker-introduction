@@ -1,6 +1,10 @@
 {
   "name": "docker-introduction",
   "version": "1.0.0",
+  "scripts": {
+    "build": "markdown-to-slides ./index.md --title \"Docker Introduction\" --style \"./public/stylesheets/main.css\" --output-file ./index.html",
+    "watch": "markdown-to-slides ./index.md --watch --title \"Docker Introduction\" --style \"./public/stylesheets/main.css\" --output-file ./index.html"
+  },
   "dependencies": {
     "markdown-to-slides": "*"
   }
