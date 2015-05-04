@@ -10,7 +10,8 @@ Charles B Johnson
 
 ## Agenda
 
-- What is Docker?
+- *What is Docker?*
+- How Do You Use Docker?
 
 ---
 
@@ -73,3 +74,99 @@ Charles B Johnson
 ## Agenda
 
 - ~~What is Docker?~~
+- *How Do You Use Docker?*
+
+---
+
+## How Do You Use Docker?
+
+#### Installation
+
+- On OS X
+  - Containers rely on capabilities that are only in the Linux kernel
+  - Need to use a Linux VM to host Docker, Boot2Docker (github.com/boot2docker/boot2docker)
+  is typically used
+- On Linux
+  - A kernel version 3.10+
+  - Or 2.6.32-431 with backported kernel fixes
+  - TL;DR Centos 6.5 can work with Docker, but 7+ is recommended
+
+---
+
+### How Do You Use Docker? (cont.)
+
+#### In a nutshell
+
+- Select a base image
+- Add layers on top of that image to meet your application dependencies
+- Run a container based on that image
+  - Start your application
+
+This can be done declaratively with a Dockerfile, or manually
+
+---
+
+### How Do You Use Docker? (cont.)
+
+#### An io.js container in a nutshell, the manual way
+
+- Select a base image
+  - ubuntu:15.04
+
+![ubuntu docker hub](public/images/ubuntu_docker_hub.png)
+
+---
+
+### How Do You Use Docker? (cont.)
+
+- Add layers on top of that image to meet your application dependencies
+  - Create a layer that installs io.js and its dependencies
+
+```bash
+base_image="ubuntu:15.04"
+iojs="https://iojs.org/dist/v1.8.1/iojs-v1.8.1-linux-x64.tar.gz"
+
+script="
+  apt-get update --assume-yes && apt-get install --assume-yes curl
+
+  cd /usr/local
+  curl --location \"$iojs\" \
+    | tar --extract --gunzip --strip-components 1
+"
+
+container_id=$(docker run --detach $base_image bash -c "$script")
+docker wait $container_id
+image_id=$(docker commit $container_id)
+```
+
+---
+
+### How Do You Use Docker? (cont.)
+
+- Run a container based on that image
+  - Start your application
+
+```bash
+app="
+  let http = require('http');
+
+  let server = http.createServer((request, response) => {
+    response.end('Hello World\n');
+  });
+
+  server.listen(9000);
+  console.log('Server running on http://127.0.0.1:9000');
+"
+
+docker run --publish 9001:9000 $image_id \
+  iojs --use_strict --harmony_arrow_functions --eval "$app"
+```
+
+![it works](public/images/iojs_example.png)
+
+---
+
+## Agenda
+
+- ~~What is Docker?~~
+- ~~How Do You Use Docker?~~
