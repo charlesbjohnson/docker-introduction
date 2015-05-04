@@ -55,13 +55,13 @@ Charles B Johnson
   - `cgroups`
       - ie. so that a container cannot use all available CPU resources and starve other containers
   - Kernel namespaces
-      - ie. so that processes in a container have no visibility into the processes in another container
+      - ie. so that processes in a container have no visibility into the processes of another container
 - Docker
   - Images
       - Can be declaratively built with Dockerfiles
       - Layered through a Union File System (ie. AUFS)
-      - Distributable through the Docker Registry
       - Versioned and tagged with metadata
+      - Distributable through a Docker Registry
   - Containers
       - Created from images
       - Run your actual application
@@ -90,11 +90,11 @@ Charles B Johnson
 
 - On OS X
   - Containers rely on capabilities that are only in the Linux kernel
-  - Need to use a Linux VM to host Docker, Boot2Docker (github.com/boot2docker/boot2docker)
+  - You must use a Linux VM to host Docker, Boot2Docker (github.com/boot2docker/boot2docker)
   is typically used
 - On Linux
-  - A kernel version 3.10+
-  - Or 2.6.32-431 with backported kernel fixes
+  - A kernel version 3.10+ is required
+  - Or 2.6.32-431 can work with backported kernel fixes
   - TL;DR Centos 6.5 can work with Docker, but 7+ is recommended
 
 ---
@@ -104,11 +104,10 @@ Charles B Johnson
 #### In a nutshell
 
 - Select a base image
-- Add layers on top of that image to meet your application dependencies
-- Run a container based on that image
-  - Start your application
+- Add layers on top of the base image to satisfy your application's dependencies *
+- Run a container using the fully layered image that starts your application
 
-This can be done declaratively with a Dockerfile, or manually
+.footnote[*This can be done declaratively with a Dockerfile, or manually]
 
 ---
 
@@ -117,7 +116,7 @@ This can be done declaratively with a Dockerfile, or manually
 #### An io.js container in a nutshell, the manual way
 
 - Select a base image
-  - ubuntu:15.04
+  - ***ubuntu:15.04***
 
 .center[![ubuntu docker hub](public/images/ubuntu_docker_hub.png)]
 
@@ -125,8 +124,8 @@ This can be done declaratively with a Dockerfile, or manually
 
 ### How Do You Use Docker? (cont.)
 
-- Add layers on top of that image to meet your application dependencies
-  - Create a layer that installs io.js and its dependencies
+- Add layers on top of the base image to satisfy your application's dependencies
+  - ***Create a layer that installs io.js and its dependencies***
 
 ```bash
 base_image="ubuntu:15.04"
@@ -149,8 +148,9 @@ image_id=$(docker commit $container_id)
 
 ### How Do You Use Docker? (cont.)
 
-- Run a container based on that image
-  - Start your application
+- Run a container using the fully layered image that starts your application
+  - ***Run an io.js web server***
+
 
 ```bash
 app="
@@ -210,7 +210,7 @@ docker run --publish 9001:9000 $image_id \
 
 #### Virtual Machines
 
-.center[![oh god no please](public/images/spiderman_no.gif)]
+.center[![please no not this](public/images/spiderman_no.gif)]
 
 ---
 
@@ -232,11 +232,12 @@ docker run --publish 9001:9000 $image_id \
 - Maintenance is greatly simplified
 - Configuration is visual and easy to understand
 - Our applications are isolated from other applications
-- Dependencies and setup are automatically handled
+- Dependencies and machine setup/provisioning are automatically handled
 - Has its own form of version control built into the interface
 - Supports basic monitoring
 - Allows for staged deployments
 - Supports multiple environments for no extra effort
+- And much more...
 
 ---
 
@@ -244,7 +245,7 @@ docker run --publish 9001:9000 $image_id \
 
 #### OneOps
 
-- UI is cumbersome
+- Interface is cumbersome
 - Difficult to iterate and experiment since the feedback loop is slow and often error prone
 - How do you accomplish development (on a developer's machine) vs production parity?
 - Configuration is limited
